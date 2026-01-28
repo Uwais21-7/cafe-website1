@@ -347,49 +347,96 @@
             background: var(--darker-bg);
         }
 
-        .menu-categories {
+        .menu-category {
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        .menu-category.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .category-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            color: var(--accent-yellow);
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 2px solid rgba(244, 196, 48, 0.2);
+        }
+
+        .menu-items {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2.5rem;
+            gap: 1rem;
         }
 
-        .menu-card {
+        .menu-item {
             background: var(--card-bg);
-            padding: 2rem 1.5rem;
-            border-radius: 20px;
-            text-align: center;
-            transition: all var(--transition-normal);
+            padding: 1.3rem 1.5rem;
+            border-radius: 15px;
             border: 1px solid rgba(244, 196, 48, 0.1);
+            transition: all var(--transition-normal);
         }
 
-        .menu-card:active {
-            transform: translateY(-5px);
+        .menu-item:active {
+            transform: translateX(5px);
+            border-color: var(--accent-yellow);
         }
 
         @media (hover: hover) {
-            .menu-card:hover {
-                transform: translateY(-5px);
-                box-shadow: 0 8px 25px var(--shadow-soft);
+            .menu-item:hover {
+                transform: translateX(5px);
                 border-color: var(--accent-yellow);
+                box-shadow: 0 4px 15px var(--shadow-soft);
             }
         }
 
-        .menu-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .menu-card h3 {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.6rem;
-            color: var(--accent-yellow);
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
             margin-bottom: 0.5rem;
+            gap: 1rem;
         }
 
-        .menu-card p {
+        .item-name {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.15rem;
+            color: var(--text-primary);
+            font-weight: 600;
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+        }
+
+        .best-seller {
+            display: inline-block;
+            font-size: 0.7rem;
+            background: var(--accent-yellow);
+            color: var(--darker-bg);
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            letter-spacing: 0.02em;
+        }
+
+        .item-price {
+            font-size: 1.1rem;
+            color: var(--accent-yellow);
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .item-desc {
             color: var(--text-secondary);
-            font-size: 0.95rem;
+            font-size: 0.9rem;
+            line-height: 1.5;
         }
 
         .menu-cta {
@@ -398,12 +445,21 @@
             flex-direction: column;
             gap: 1rem;
             align-items: center;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 2px solid rgba(244, 196, 48, 0.2);
         }
 
         @media (min-width: 600px) {
             .menu-cta {
                 flex-direction: row;
                 justify-content: center;
+            }
+        }
+
+        @media (min-width: 768px) {
+            .menu-items {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -769,9 +825,7 @@
         }
 
         @media (min-width: 1024px) {
-            .menu-categories {
-                grid-template-columns: repeat(4, 1fr);
-            }
+            /* Menu now uses its own responsive grid */
         }
 
         /* ========================================
@@ -851,31 +905,186 @@
     <section id="menu" class="menu fade-in">
         <div class="container">
             <h2 class="section-title">Our Menu</h2>
-            <div class="menu-categories">
-                <div class="menu-card">
-                    <div class="menu-icon">☕</div>
-                    <h3>Coffee</h3>
-                    <p>From classic espresso to signature blends</p>
-                </div>
-                <div class="menu-card">
-                    <div class="menu-icon">🥤</div>
-                    <h3>Beverages</h3>
-                    <p>Refreshing drinks for every mood</p>
-                </div>
-                <div class="menu-card">
-                    <div class="menu-icon">🥐</div>
-                    <h3>Snacks</h3>
-                    <p>Perfect bites to complement your drink</p>
-                </div>
-                <div class="menu-card">
-                    <div class="menu-icon">🍰</div>
-                    <h3>Desserts</h3>
-                    <p>Sweet indulgences that delight</p>
+            
+            <!-- Coffee -->
+            <div class="menu-category">
+                <h3 class="category-title">☕ Coffee</h3>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4 class="item-name">Cappuccino <span class="best-seller">★ Bestseller</span></h4>
+                            <span class="item-price">₹120</span>
+                        </div>
+                        <p class="item-desc">Classic Italian espresso with steamed milk foam</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4 class="item-name">Café Latte</h4>
+                            <span class="item-price">₹130</span>
+                        </div>
+                        <p class="item-desc">Smooth espresso with velvety steamed milk</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4 class="item-name">Americano</h4>
+                            <span class="item-price">₹100</span>
+                        </div>
+                        <p class="item-desc">Bold espresso with hot water for a rich flavor</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4 class="item-name">Cold Coffee</h4>
+                            <span class="item-price">₹140</span>
+                        </div>
+                        <p class="item-desc">Chilled coffee blend with ice cream</p>
+                    </div>
                 </div>
             </div>
+
+            <!-- Hot Beverages -->
+            <div class="menu-category">
+                <h3 class="category-title">🍵 Hot Beverages</h3>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4 class="item-name">Masala Chai</h4>
+                            <span class="item-price">₹60</span>
+                        </div>
+                        <p class="item-desc">Traditional Indian spiced tea</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4 class="item-name">Hot Chocolate</h4>
+                            <span class="item-price">₹110</span>
+                        </div>
+                        <p class="item-desc">Rich cocoa with steamed milk and whipped cream</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4 class="item-name">Green Tea</h4>
+                            <span class="item-price">₹80</span>
+                        </div>
+                        <p class="item-desc">Refreshing herbal green tea</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Shakes & Cold Beverages -->
+            <div class="menu-category">
+                <h3 class="category-title">🥤 Shakes & Cold Beverages</h3>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4 class="item-name">Oreo Shake <span class="best-seller">★ Bestseller</span></h4>
+                            <span class="item-price">₹160</span>
+                        </div>
+                        <p class="item-desc">Creamy Oreo cookie milkshake topped with cream</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4 class="item-name">Chocolate Shake</h4>
+                            <span class="item-price">₹150</span>
+                        </div>
+                        <p class="item-desc">Rich chocolate blended with ice cream</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4 class="item-name">Mango Smoothie</h4>
+                            <span class="item-price">₹140</span>
+                        </div>
+                        <p class="item-desc">Fresh mango smoothie with yogurt</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4 class="item-name">Fresh Lime Soda</h4>
+                            <span class="item-price">₹80</span>
+                        </div>
+                        <p class="item-desc">Refreshing lime with sparkling soda</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Snacks -->
+            <div class="menu-category">
+                <h3 class="category-title">🍔 Snacks & Fast Food</h3>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4 class="item-name">Paneer Tikka Wrap <span class="best-seller">★ Bestseller</span></h4>
+                            <span class="item-price">₹180</span>
+                        </div>
+                        <p class="item-desc">Grilled paneer tikka with veggies in soft wrap</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4 class="item-name">Double Decker Burger</h4>
+                            <span class="item-price">₹160</span>
+                        </div>
+                        <p class="item-desc">Double patty veg burger with cheese and sauces</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4 class="item-name">Grilled Cottage Sandwich</h4>
+                            <span class="item-price">₹140</span>
+                        </div>
+                        <p class="item-desc">Grilled sandwich with cottage cheese filling</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4 class="item-name">French Fries</h4>
+                            <span class="item-price">₹90</span>
+                        </div>
+                        <p class="item-desc">Crispy golden fries with seasoning</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4 class="item-name">Veg Pizza (Regular)</h4>
+                            <span class="item-price">₹220</span>
+                        </div>
+                        <p class="item-desc">Loaded with fresh veggies and mozzarella cheese</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Desserts -->
+            <div class="menu-category">
+                <h3 class="category-title">🍰 Desserts</h3>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4 class="item-name">Chocolate Brownie <span class="best-seller">★ Bestseller</span></h4>
+                            <span class="item-price">₹120</span>
+                        </div>
+                        <p class="item-desc">Warm brownie with vanilla ice cream</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4 class="item-name">Red Velvet Cake</h4>
+                            <span class="item-price">₹130</span>
+                        </div>
+                        <p class="item-desc">Classic red velvet with cream cheese frosting</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4 class="item-name">Ice Cream Sundae</h4>
+                            <span class="item-price">₹110</span>
+                        </div>
+                        <p class="item-desc">Vanilla ice cream with toppings and chocolate sauce</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4 class="item-name">Chocolate Truffle Pastry</h4>
+                            <span class="item-price">₹140</span>
+                        </div>
+                        <p class="item-desc">Layered chocolate pastry with truffle filling</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- CTA Buttons -->
             <div class="menu-cta">
-                <a href="https://www.swiggy.com/menu/923328" class="btn btn-primary" target="_blank" rel="noopener">View on Swiggy</a>
-                <a href="https://www.zomato.com/ncr/cafe-ellebee-raj-nagar-ghaziabad/order" class="btn btn-primary" target="_blank" rel="noopener">View on Zomato</a>
+                <a href="https://www.swiggy.com/menu/923328" class="btn btn-primary" target="_blank" rel="noopener">View Full Menu on Swiggy</a>
+                <a href="https://www.zomato.com/ncr/cafe-ellebee-raj-nagar-ghaziabad/order" class="btn btn-primary" target="_blank" rel="noopener">View Full Menu on Zomato</a>
             </div>
         </div>
     </section>
@@ -1068,6 +1277,13 @@
 
         // Observe all fade-in elements
         document.querySelectorAll('.fade-in').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Observe menu categories for staggered animation
+        document.querySelectorAll('.menu-category').forEach((element, index) => {
+            // Add delay based on index for staggered effect
+            element.style.transitionDelay = `${index * 0.1}s`;
             observer.observe(element);
         });
 
