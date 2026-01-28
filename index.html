@@ -592,63 +592,116 @@
 
         /* ========================================
            GALLERY SECTION
-        ======================================== */
+           ======================================== */
         .gallery {
             background: var(--dark-bg);
+        }
+
+        .gallery-subtitle {
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-top: -1.5rem;
+            margin-bottom: 2.5rem;
+            font-style: italic;
         }
 
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
+            margin-bottom: 2.5rem;
         }
 
         .gallery-item {
-            aspect-ratio: 1;
+            aspect-ratio: 1 / 1;
             border-radius: 20px;
             background: var(--card-bg);
             border: 2px solid rgba(244, 196, 48, 0.1);
             overflow: hidden;
             position: relative;
+            cursor: pointer;
             transition: all var(--transition-normal);
         }
 
-        /* For actual images - add these classes when implementing */
         .gallery-item img {
             width: 100%;
             height: 100%;
             object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.3) 70%, transparent 100%);
+            padding: 1.5rem;
+            transform: translateY(100%);
             transition: transform var(--transition-normal);
         }
 
-        .gallery-item:active,
+        .overlay-caption {
+            color: var(--accent-yellow);
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .gallery-item:active {
+            transform: scale(0.98);
+            border-color: var(--accent-yellow);
+        }
+
         .gallery-item:active img {
             transform: scale(1.05);
+        }
+
+        .gallery-item:active .gallery-overlay {
+            transform: translateY(0);
         }
 
         @media (hover: hover) {
             .gallery-item:hover {
                 border-color: var(--accent-yellow);
-                box-shadow: 0 8px 25px var(--shadow-soft);
+                box-shadow: 0 8px 30px var(--shadow-soft), 0 0 20px var(--shadow-glow);
             }
             
             .gallery-item:hover img {
-                transform: scale(1.1);
+                transform: scale(1.08);
+            }
+
+            .gallery-item:hover .gallery-overlay {
+                transform: translateY(0);
             }
         }
 
-        /* Placeholder styling */
-        .gallery-placeholder {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.95rem;
-            color: var(--text-secondary);
+        .gallery-cta {
             text-align: center;
-            padding: 2rem;
-            height: 100%;
+            padding-top: 2rem;
+            border-top: 2px solid rgba(244, 196, 48, 0.2);
         }
 
+        .gallery-cta-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .gallery-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
         /* ========================================
            INSTAGRAM SECTION
         ======================================== */
@@ -1146,31 +1199,79 @@
         </div>
     </section>
 
-    <!-- Gallery Section -->
+    <!-- ============================================
+         GALLERY SECTION
+         Replace PASTE_IMAGE_URL_HERE with actual image URLs
+         ============================================ -->
     <section id="gallery" class="gallery fade-in">
         <div class="container">
             <h2 class="section-title">Gallery</h2>
+            <p class="gallery-subtitle">Experience the ElleBee Vibe</p>
             <div class="gallery-grid">
-                <!-- Image placeholders - Replace with actual images and add loading="lazy" -->
-                <!-- Example: <div class="gallery-item"><img src="images/coffee-1.jpg" alt="Artisan Coffee" loading="lazy"></div> -->
+                
                 <div class="gallery-item">
-                    <div class="gallery-placeholder">☕<br>Artisan Coffee</div>
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHVAwerwr00OZ8Vn10SuDeDOX_COlmXwxHCSvLenqfQKVUiaXLsV9APXKyMLiVVFx4Skt1SF1ltwJ2fnSXhMtfhxLshwodGKv7NqGmDUiwZ6Bcg4qlaImBbnja9lknDrmDmcZdVsG7LC=s1450-w768-h1450-rw" alt="Cafe ElleBee interior and seating area" loading="lazy">
+                    <div class="gallery-overlay">
+                        <p class="overlay-caption">Place Holder</p>
+                    </div>
                 </div>
+                
                 <div class="gallery-item">
-                    <div class="gallery-placeholder">🥐<br>Fresh Pastries</div>
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipN6Drc9MJklUUWV51DQzGD1xrYjpLJ3eSmnyTja=s519-w519-h390-n-k-no" alt="Signature coffee and beverages at Cafe ElleBee" loading="lazy">
+                    <div class="gallery-overlay">
+                        <p class="overlay-caption">Place Holder</p>
+                    </div>
                 </div>
+                
                 <div class="gallery-item">
-                    <div class="gallery-placeholder">✨<br>Cozy Ambience</div>
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipNHEK7gmO0PQWIccIWJUnAAh0DU224pEzeQS55e=s519-w519-h390-n-k-no" alt="Delicious food and snacks at Cafe ElleBee" loading="lazy">
+                    <div class="gallery-overlay">
+                        <p class="overlay-caption">Place Holder</p>
+                    </div>
                 </div>
+                
                 <div class="gallery-item">
-                    <div class="gallery-placeholder">🍰<br>Delicious Desserts</div>
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipMCjHR6E8t9f27B3PmQd9FTd4TbDmAoooJ6P77e=s1450-w768-h1450-rw" alt="Desserts and sweet treats at Cafe ElleBee" loading="lazy">
+                    <div class="gallery-overlay">
+                        <p class="overlay-caption">Place Holder</p>
+                    </div>
                 </div>
+                
                 <div class="gallery-item">
-                    <div class="gallery-placeholder">🌿<br>Relaxing Vibes</div>
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHVAwernfkbeho3yQVjxKeNmgAB7qwf61Du_VzzdTmyutt74ceZDyhSfLbRP9y2bz6e1Jth6mjNkeNbpTNMfpcD7j3Wtz2qzc0fTKKKBAuBW_fE-PVfxxKMQ8_JimLnZ-dQYk8Hd-cenf0QBJPhz=s1450-w768-h1450-rw" alt="Shakes and cold beverages at Cafe ElleBee" loading="lazy">
+                    <div class="gallery-overlay">
+                        <p class="overlay-caption">Place Holder</p>
+                    </div>
                 </div>
+                
                 <div class="gallery-item">
-                    <div class="gallery-placeholder">📸<br>Instagram-Worthy</div>
+                    <img src="https://lh3.googleusercontent.com/gps-cs-s/AHVAwepPv0ywVwDK-CILZhALIQtIEADCbakCFidy_9CsDo4Mi6kUY6HPh86loFr_D68iCbkO_aXfl7PtaEc9uwr-e-Dckt0zzMnLOEazCXjak0V86bdhl1_DQUljC5AfzNDnmACxr20U0ucc5_I1=s1450-w768-h1450-rw" alt="Warm ambience and decor at Cafe ElleBee" loading="lazy">
+                    <div class="gallery-overlay">
+                        <p class="overlay-caption">Place Holder</p>
+                    </div>
                 </div>
+                
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/proxy/8p21r9bnw0F-doXQEySBmiXKbZBuiIww2fPcvnc7u7eUSChw41LyB1-nf1caXi7r4NZYC2JUGIPcsDXJOHeazPNCXfunNc8zT-pv7clRYpiy9-LXbgcRsYO2FbXH570ufSWgnV61tC-xABvoC-g-K3zyuPIffA=s1450-w768-h1450-rw" alt="Special dishes at Cafe ElleBee" loading="lazy">
+                    <div class="gallery-overlay">
+                        <p class="overlay-caption">Place Holder</p>
+                    </div>
+                </div>
+                
+                <div class="gallery-item">
+                    <img src="https://lh3.googleusercontent.com/p/AF1QipNPDtnbrHvr6nB7kfFuq22xoDccnNGmt7XMfx5p=s1450-w768-h1450-rw" alt="Instagram-worthy corner at Cafe ElleBee" loading="lazy">
+                    <div class="gallery-overlay">
+                        <p class="overlay-caption">Place Holder</p>
+                    </div>
+                </div>
+                
+            </div>
+            
+            <div class="gallery-cta">
+                <p class="gallery-cta-text">See more delicious moments on Instagram</p>
+                <a href="https://www.instagram.com/cafe_ellebee" class="btn btn-secondary" target="_blank" rel="noopener">
+                    📷 Follow @cafe_ellebee
+                </a>
             </div>
         </div>
     </section>
@@ -1333,4 +1434,5 @@
         }, { passive: true });
     </script>
 </body>
+</html></body>
 </html>
